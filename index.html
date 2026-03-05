@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 10 Simulator</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://dragselect.com/ds.min.js"></script>
+</head>
+
+<body dir="ltr">
+
+    <!-- Windows 10 Desktop Icons -->
+    <aside>
+        <div class='apps'><img
+                src='https://d33wubrfki0l68.cloudfront.net/f23270c8732fcd425cfba34215cebd21c49f2f56/e090c/img/recycle.png'>
+            <p>Recycle Bin</p>
+        </div>
+        <div class='apps'><img
+                src='https://d33wubrfki0l68.cloudfront.net/68f0050063c1964dfe8e5ab4309941c6185dbeac/9e24d/img/folder.png'>
+            <p>New Folder</p>
+        </div>
+        <div class='apps'><img
+                src='https://d33wubrfki0l68.cloudfront.net/8e9c0ff3bf0d0c8377be8d49f621d696765ec6c7/38167/img/photoshop.png'>
+            <p>Adobe PS</p>
+        </div>
+        <div class='apps'><img
+                src='https://d33wubrfki0l68.cloudfront.net/f955d9ed7e76e0ccc7b0aa147f3650473244ccd0/4a361/img/dreamweaver.png'>
+            <p>Adobe DW</p>
+        </div>
+        <div class='apps'><img
+                src='https://d33wubrfki0l68.cloudfront.net/e4053d5ce8a8d5ab5bf23e4f9ecabcf18b411092/856ac/img/chrome.png'>
+            <p>Google Chrome</p>
+        </div>
+        <div class='apps'><img
+                src='https://d33wubrfki0l68.cloudfront.net/c9f211491ff6501b7920ddf75870224970cf6dcd/e3c59/img/opera.png'>
+            <p>Opera</p>
+        </div>
+        <div class='apps'><img
+                src='https://d33wubrfki0l68.cloudfront.net/7f7a977aacd545fdaea23a9a95cdf708fcc72cc5/7a74e/img/whatsapp.png'>
+            <p>Whatsapp</p>
+        </div>
+    </aside>
+
+    <!-- The IDLE Window -->
+    <div class="window-container minimized" id="idle-window">
+        <!-- Windows 10 Title Bar -->
+        <div class="title-bar" id="title-bar-drag">
+            <div class="title-bar-left">
+                <!-- SECRET TRIGGER: The Python Logo -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/110px-Python-logo-notext.svg.png"
+                    alt="Python Logo" class="icon" id="secret-trigger" title="">
+                <span class="title-text">*idle_programs* - Python 3.10.4 Shell</span>
+            </div>
+            <div class="title-bar-right">
+                <div class="control-btn minimize">&#x2014;</div>
+                <div class="control-btn maximize">&#x25A1;</div>
+                <div class="control-btn close">&#x2715;</div>
+            </div>
+        </div>
+
+        <!-- IDLE Menu Bar (Exact replica) -->
+        <div class="menu-bar">
+            <span class="menu-item">File</span>
+            <span class="menu-item">Edit</span>
+            <span class="menu-item">Shell</span>
+            <span class="menu-item">Debug</span>
+            <span class="menu-item">Options</span>
+            <span class="menu-item">Window</span>
+            <span class="menu-item">Help</span>
+        </div>
+
+        <!-- Editor/Shell Area - Fully editable to look active! -->
+        <div class="editor-area" id="editor" contenteditable="true" spellcheck="false">
+        </div>
+    </div>
+
+    <!-- THE CHEAT PANEL (Hidden by default) -->
+    <div class="cheat-panel" id="cheat-panel">
+        <div class="cheat-nav">
+            <button onclick="loadProgram(1)">1</button>
+            <button onclick="loadProgram(2)">2</button>
+            <button onclick="loadProgram(3)">3</button>
+            <button onclick="loadProgram(4)">4</button>
+            <button onclick="loadProgram(5)">5</button>
+            <button onclick="loadProgram(6)">6</button>
+            <button onclick="loadProgram(7)">7</button>
+            <button onclick="loadProgram(8)">8</button>
+            <button onclick="loadProgram(9)">9</button>
+            <button onclick="loadProgram(10)">10</button>
+        </div>
+        <div class="cheat-content" id="cheat-content">
+            <p style="color: #666; font-family: sans-serif; text-align: center; margin-top: 50px;">
+                Select a program from the top navigation.<br><br>
+                <em>Click anywhere outside this box to instantly hide it.</em>
+            </p>
+        </div>
+    </div>
+
+    <!-- Windows 10 Taskbar / Footer -->
+    <footer style="color:white !important;">
+        <div class="footer-left">
+            <img class="win-start-btn"
+                src='https://d33wubrfki0l68.cloudfront.net/74cc855a11db6d4dc18cb479f057ade416bd6161/5a9dc/img/windows-logo.png'
+                title="Start">
+            <textarea placeholder='Search Windows'></textarea>
+
+            <img class="win-app"
+                src='https://d33wubrfki0l68.cloudfront.net/acbe3ec9648dc1ebf35493a07a5b4378768174e4/9c621/img/edge.png'
+                title='Microsoft Edge'>
+
+            <!-- Python IDLE Taskbar Icon -->
+            <div class="taskbar-app" id="taskbar-idle" title="*idle_programs* - Python 3.10.4 Shell">
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/110px-Python-logo-notext.svg.png">
+            </div>
+
+            <img class="win-app"
+                src='https://d33wubrfki0l68.cloudfront.net/fbcbd88cc8ea8969ea16178052ef6ac8b8a9b78b/7912c/img/folder-footer.png'
+                title='Windows Explorer'>
+            <img class="win-app"
+                src='https://d33wubrfki0l68.cloudfront.net/e4053d5ce8a8d5ab5bf23e4f9ecabcf18b411092/856ac/img/chrome.png'
+                title='Google Chrome'>
+            <img class="win-app"
+                src='https://d33wubrfki0l68.cloudfront.net/7f7a977aacd545fdaea23a9a95cdf708fcc72cc5/7a74e/img/whatsapp.png'
+                title='Whatsapp'>
+            <img class="win-app"
+                src='https://d33wubrfki0l68.cloudfront.net/f955d9ed7e76e0ccc7b0aa147f3650473244ccd0/4a361/img/dreamweaver.png'
+                title='Adobe Dreamweaver'>
+            <img class="win-app"
+                src='https://d33wubrfki0l68.cloudfront.net/0b1f553e6d2b0b0f4848895a61f29dac6d9c0f46/5fcc0/img/illustrator.png'
+                title='Adobe Illustrator'>
+            <img class="win-app"
+                src='https://d33wubrfki0l68.cloudfront.net/8e9c0ff3bf0d0c8377be8d49f621d696765ec6c7/38167/img/photoshop.png'
+                title='Adobe Photoshop'>
+        </div>
+
+        <div class="footer-right">
+            <div class="tray-icons">
+                <img
+                    src='https://d33wubrfki0l68.cloudfront.net/d35cec0c66aef4cb7d5ee13d3bd46e047aa4f8ef/6e1a4/img/up-arrow.png'>
+                <img src='https://d33wubrfki0l68.cloudfront.net/ef2ca8ab5338799a0a80c6454c40ef33d62ae885/c0b08/img/wifi.png'
+                    title='Internet Access'>
+                <img src='https://d33wubrfki0l68.cloudfront.net/8fe6698cd74b73f44562c7ff5db9f9d9a16eb33f/be0b5/img/speaker.png'
+                    title='Speaker'>
+            </div>
+            <div class="padding-time">
+                <!-- Wrapper for absolute vertical centering if needed, using text align right -->
+                <div style="line-height:1.2;">
+                    <span id="hours"></span>:<span id="mins"></span><br>
+                    <span id='date'></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js?v=2"></script>
+</body>
+
+</html>
